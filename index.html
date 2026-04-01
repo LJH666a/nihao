@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>奥特曼有声相册</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: "Microsoft YaHei", Arial, sans-serif; background: #222; color: #fff; text-align: center;}
+    .album {max-width: 600px; margin: 40px auto;}
+    img {width: 100%; height: auto; border-radius: 8px;}
+    .controls {margin-top: 10px;}
+    button {margin: 0 5px; padding: 8px 16px; border: none; border-radius: 4px; background: #337ab7; color: #fff; cursor: pointer;}
+    button:disabled {background: #777;}
+  </style>
+</head>
+<body>
+  <h1>奥特曼有声相册</h1>
+  <div class="album">
+    <img id="photo" src="images/ultraman1.jpg" alt="奥特曼图片">
+    <audio id="audio" controls src="audio/ultraman1.mp3"></audio>
+    <div class="controls">
+      <button onclick="prev()" id="prevBtn">上一张</button>
+      <button onclick="next()" id="nextBtn">下一张</button>
+    </div>
+    <p id="caption">奥特曼·初代</p>
+  </div>
+  <script>
+    // 图片、音频和描述列表
+    const items = [
+      {
+        img: 'images/ultraman1.jpg',
+        audio: 'audio/ultraman1.mp3',
+        caption: '奥特曼·初代'
+      },
+      {
+        img: 'images/ultraman2.jpg',
+        audio: 'audio/ultraman2.mp3',
+        caption: '奥特曼·赛文'
+      },
+      {
+        img: 'images/ultraman3.jpg',
+        audio: 'audio/ultraman3.mp3',
+        caption: '奥特曼·迪迦'
+      },
+      // ...可以继续补充更多
+    ];
+    let idx = 0;
+    function update() {
+      document.getElementById('photo').src = items[idx].img;
+      document.getElementById('audio').src = items[idx].audio;
+      document.getElementById('caption').innerText = items[idx].caption;
+      document.getElementById('prevBtn').disabled = idx === 0;
+      document.getElementById('nextBtn').disabled = idx === items.length - 1;
+    }
+    function prev() { if(idx>0){idx--; update();}}
+    function next() { if(idx<items.length-1){idx++; update();}}
+    update();
+  </script>
+</body>
+</html>
